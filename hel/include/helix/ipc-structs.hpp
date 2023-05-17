@@ -120,6 +120,11 @@ struct DismissResult {
 		_valid = true;
 	}
 
+	void set_error(HelError error) {
+		_error = error;
+		_valid = true;
+	}
+
 private:
 	bool _valid;
 	HelError _error;
@@ -144,6 +149,11 @@ struct OfferResult {
 		_error = result->error;
 		_descriptor = UniqueDescriptor{result->handle};
 		ptr = (char *)ptr + sizeof(HelHandleResult);
+		_valid = true;
+	}
+
+	void set_error(HelError error) {
+		_error = error;
 		_valid = true;
 	}
 
@@ -175,6 +185,11 @@ struct AcceptResult {
 		_valid = true;
 	}
 
+	void set_error(HelError error) {
+		_error = error;
+		_valid = true;
+	}
+
 private:
 	bool _valid;
 	HelError _error;
@@ -193,6 +208,11 @@ struct ImbueCredentialsResult {
 		auto result = reinterpret_cast<HelSimpleResult *>(ptr);
 		_error = result->error;
 		ptr = (char *)ptr + sizeof(HelSimpleResult);
+		_valid = true;
+	}
+
+	void set_error(HelError error) {
+		_error = error;
 		_valid = true;
 	}
 
@@ -222,6 +242,11 @@ struct ExtractCredentialsResult {
 		_valid = true;
 	}
 
+	void set_error(HelError error) {
+		_error = error;
+		_valid = true;
+	}
+
 private:
 	bool _valid;
 	HelError _error;
@@ -243,6 +268,11 @@ struct SendBufferResult {
 		_valid = true;
 	}
 
+	void set_error(HelError error) {
+		_error = error;
+		_valid = true;
+	}
+
 private:
 	bool _valid;
 	HelError _error;
@@ -260,6 +290,11 @@ struct SendBufferSgResult {
 		auto result = reinterpret_cast<HelSimpleResult *>(ptr);
 		_error = result->error;
 		ptr = (char *)ptr + sizeof(HelSimpleResult);
+		_valid = true;
+	}
+
+	void set_error(HelError error) {
+		_error = error;
 		_valid = true;
 	}
 
@@ -287,6 +322,11 @@ struct RecvBufferResult {
 		_error = result->error;
 		_length = result->length;
 		ptr = (char *)ptr + sizeof(HelLengthResult);
+		_valid = true;
+	}
+
+	void set_error(HelError error) {
+		_error = error;
 		_valid = true;
 	}
 
@@ -343,6 +383,11 @@ struct RecvInlineResult {
 		_element = {};
 	}
 
+	void set_error(HelError error) {
+		_error = error;
+		_valid = true;
+	}
+
 private:
 	bool _valid;
 	HelError _error;
@@ -363,6 +408,11 @@ struct PushDescriptorResult {
 		auto result = reinterpret_cast<HelSimpleResult *>(ptr);
 		_error = result->error;
 		ptr = (char *)ptr + sizeof(HelSimpleResult);
+		_valid = true;
+	}
+
+	void set_error(HelError error) {
+		_error = error;
 		_valid = true;
 	}
 
@@ -390,6 +440,11 @@ struct PullDescriptorResult {
 		_error = result->error;
 		_descriptor = UniqueDescriptor{result->handle};
 		ptr = (char *)ptr + sizeof(HelHandleResult);
+		_valid = true;
+	}
+
+	void set_error(HelError error) {
+		_error = error;
 		_valid = true;
 	}
 
