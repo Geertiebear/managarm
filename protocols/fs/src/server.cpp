@@ -156,6 +156,7 @@ async::detached handlePassthrough(smarter::shared_ptr<void> file,
 		data.resize(req.size());
 		auto res = co_await file_ops->read(file.get(), extract_creds.credentials(),
 				data.data(), req.size(), async::cancellation_token{ce});
+		std::cout << "returned from read!" << std::endl;
 
 		managarm::fs::SvrResponse resp;
 		resp.set_error(mapFsError(res.error()));
@@ -178,6 +179,10 @@ async::detached handlePassthrough(smarter::shared_ptr<void> file,
 			helix_ng::sendBuffer(data.data(), std::get<size_t>(res))
 		);
 		HEL_CHECK(send_resp.error());
+		if (send_data.error() == kHelErrThreadTerminated) {
+			std::cout << "thread terminated already but it's okay" << std::endl;
+			co_return;
+		}
 		HEL_CHECK(send_data.error());
 	}else if(req.req_type() == managarm::fs::CntReqType::PT_PREAD) {
 		auto [extract_creds] = co_await helix_ng::exchangeMsgs(
